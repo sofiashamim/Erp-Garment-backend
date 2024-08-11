@@ -4,7 +4,10 @@ const port=2000
 const connectToDb =require('./db')
 connectToDb()
 const cors = require('cors')
+const router = require('./routes/Route')
+
 let Unit= require('./models/inventory/UnitModel')
+
 let unitRoutes= require('./routes/unitRoute');
 let accessorylistRoutes= require('./routes/accessorylistRoute');
 let accessoryOrderlistRoutes= require('./routes/accessoryOrdeRoute');
@@ -21,7 +24,7 @@ app.use(express.json())
 app.get('/',(req,res)=>{
     res.send('welcome')
 })                              
-
+app.use('/api',router),
 app.use('/api/unit',unitRoutes)
 app.use('/inv/accList',accessorylistRoutes)
 app.use('/inv/accOrderList',accessoryOrderlistRoutes)

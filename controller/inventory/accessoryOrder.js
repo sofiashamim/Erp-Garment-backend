@@ -6,15 +6,15 @@ const createAccessoryOrder= async(req,res)=>{
     try {
        
         newAccessoryOrder= await new AccessorryOrder({
-            name:name,
+            name:accessories,
             invoice:invoice,
             partyName:partyName,
             accessories:accessories,
-            unit:unit,
+            // unit:unit, 
             qty:qty,
             unitPrice:unitPrice,
             ttl:ttl
-        })
+        }) 
         
         await newAccessoryOrder.save()
           res.status(200).json({success:true,msg:"accessory created",newAccessoryOrder})
@@ -25,9 +25,9 @@ const createAccessoryOrder= async(req,res)=>{
 }
 
 let deleteAccessoryOrder= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
-    await Post.findByIdAndDelete(id)
+    await AccessorryOrder.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"accessory deleted successfully"})
  } catch (error) {
 return res.status(500).json({success:false,msg:"error in deletion",error:error.message})
@@ -36,7 +36,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateAccessoryOrder =async(req,res)=>{
     let {name,invoice,partyName,accessories,unit,qty,unitPrice,ttl}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let accOrderlist= await AccessorryOrder.findByIdAndUpdate({_id:id},{$set:{name,invoice,partyName,accessories,unit,qty,unitPrice,ttl}},{new:true})
         res.status(200).json({success:true,msg:"list updated successfully",accOrderlist})
@@ -56,9 +56,9 @@ const singleAccessoryOrder= async(req,res)=>{
 }
 
 const getAllAccessoryOrder= async(req,res)=>{
-    let _id= req.params._id;
+    // let _id= req.params._id;
     try {
-        let allList= await AccessorryOrder.find({name:_id})
+        let allList= await AccessorryOrder.find()
         if (allList.length) {
             res.status(200).json({success:true,msg:"fetched all accessory order list successfully",allList})
             
