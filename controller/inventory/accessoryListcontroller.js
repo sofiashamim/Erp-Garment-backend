@@ -1,4 +1,4 @@
-let Accessorry= require('../../models/inventory/UnitModel')
+let Accessorry= require('../../models/inventory/Accessorylist')
 const bcrypt= require('bcrypt')
 
 const createAccessory= async(req,res)=>{
@@ -11,7 +11,7 @@ const createAccessory= async(req,res)=>{
             price:price,
             description:description,
             status:status,
-        })
+        }) 
         
         await newAccessory.save()
           res.status(200).json({success:true,msg:"accessory created",newAccessory})
@@ -22,9 +22,10 @@ const createAccessory= async(req,res)=>{
 }
 
 let deleteAccessory= async(req,res)=>{
-    let id=req.params._id;
+    console.log(req.params)
+    let id=req.params.id;
  try {
-    await Post.findByIdAndDelete(id)
+    await Accessorry.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"accessory deleted successfully"})
  } catch (error) {
 return res.status(500).json({success:false,msg:"error in deletion",error:error.message})
@@ -33,7 +34,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateAccessory =async(req,res)=>{
     let {name,unit,price,description,status}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let list= await Accessorry.findByIdAndUpdate({_id:id},{$set:{name,unit,price,description,status}},{new:true})
         res.status(200).json({success:true,msg:"list updated successfully",list})
@@ -53,9 +54,9 @@ const singleAccessory= async(req,res)=>{
 }
 
 const getAllAccessory= async(req,res)=>{
-    let _id= req.params._id;
+    // let _id= req.params._id;
     try {
-        let allList= await Post.find({name:_id})
+        let allList= await Accessorry.find() 
         if (allList.length) {
             res.status(200).json({success:true,msg:"fetched all accessory list successfully",allList})
             

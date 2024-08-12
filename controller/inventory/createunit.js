@@ -2,7 +2,6 @@ let Unit= require('../../models/inventory/UnitModel')
 const bcrypt= require('bcrypt')
 
 const createUnit= async(req,res)=>{
-   
     try {
        
          user= await new Unit({
@@ -50,6 +49,7 @@ const deleteUnit = async (req, res) => {
 
 // Edit unit details
 const editUnitDetails = async (req, res) => {
+   
     try {
         let unit = await Unit.findById(req.params.id);
         if (!unit) {
@@ -65,12 +65,28 @@ const editUnitDetails = async (req, res) => {
     }
 };
 
-
+const getAllUnit= async(req,res)=>{
+    
+   console.log(req,"testtt")
+    try { 
+        let allList= await Unit.find()
+        console.log("her",allList);
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all unit list successfully",allList})
+            
+        } else {
+            return res.status(404).json({success:false,msg:"no list found"})
+        }
+    } catch (error) {
+        res.status().json({success:false,msg:"error in fetching allunit list"})
+    }
+}
 
 
 module.exports={
     createUnit,
     updateUnitStatus,
     editUnitDetails,
-    deleteUnit
+    deleteUnit,
+    getAllUnit
 }
