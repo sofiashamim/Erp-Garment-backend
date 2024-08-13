@@ -4,39 +4,39 @@ const Schema = mongoose.Schema;
 const salarySchema = new Schema({
     employee: {
         type: String,
-        required: true,
+        required: false,
     },
     month: {
         type: String,
-        required: true,
+        required: false,
     },
     year: {
         type: String,
-        required: true,
+        required: false,
     },
     salaryAmt: {
         type: String,
-        required: true,
+        required: false,
     },
     paidAmt: {
         type: String,
-        required: true,
+        required: false,
     },
     dueSalary: {
         type: String,
-        required: true,
+        required: false,
     },
     payMethod: {
         type: String,
-        required: true,
+        required: false,
     },
     payDate: {
         type: String,
-        required: true,
+        required: false,
     },
     notes: {
         type: String,
-        required: true,
+        required: false,
     }
   
 }, { timestamps: true });

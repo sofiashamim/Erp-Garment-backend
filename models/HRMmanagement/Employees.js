@@ -26,7 +26,7 @@ const empSchema = new Schema({
         type: String,
         required: true,
     },
-    birthdate: {
+    birthDate: {
         type: String,
         required: true,
     },

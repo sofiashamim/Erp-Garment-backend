@@ -8,8 +8,8 @@ const buyerSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
-        uniquae: true,
+        required: false,
+        unique: true,
     },
     phone: {
         type: String,
@@ -29,8 +29,12 @@ const buyerSchema = new Schema({
     },
     image: {
         type: String,
-        required: true,
+        required: false,
     },
+    role:{
+        type: String,
+        required: false,
+    }
     
 }, { timestamps: true });
 

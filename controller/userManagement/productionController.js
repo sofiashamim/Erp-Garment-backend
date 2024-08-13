@@ -54,7 +54,7 @@ let loginProduction= async(req,res)=>{
 }
 
 let deleteProduction= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
     await Production.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"Production deleted successfully"})
@@ -66,7 +66,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateProduction =async(req,res)=>{
     let {name,email,username,password,phone,confirmPassword,image}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let update= await Production.findByIdAndUpdate({_id:id},{$set:{name,email,username,password,phone,confirmPassword,image}},{new:true})
         res.status(200).json({success:true,msg:"Production updated successfully",update})
@@ -78,9 +78,9 @@ const updateProduction =async(req,res)=>{
 const getAllProduction= async(req,res)=>{
     let _id= req.params._id;
     try {
-        let allProduction= await Production.find({name:_id})
-        if (allProduction.length) {
-            res.status(200).json({success:true,msg:"fetched all allProduction list successfully",allProduction})
+        let allList= await Production.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all allProduction list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no allProduction list found"})

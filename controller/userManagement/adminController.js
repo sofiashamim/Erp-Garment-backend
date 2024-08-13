@@ -5,7 +5,7 @@ let createAdmin= async(req,res)=>{
     let {name,email,username,password,phone,confirmPassword,image}=req.body;
 
     try {
-        let user= await Auth.findOne({email:email});
+        let user= await Auth.findOne({name:name});
         if(!user){
             const salt = bcrypt.genSaltSync(10);
             const hashpassword = bcrypt.hashSync(password, salt);
@@ -15,6 +15,7 @@ let createAdmin= async(req,res)=>{
             email:req.body.email,
             password:hashpassword,
             username:req.body.username,
+            role:req.body.role,
             phone:req.body.phone,
             confirmPassword:req.body.password,
             image:req.body.image
@@ -54,7 +55,7 @@ let loginAdmin= async(req,res)=>{
 }
 
 let deleteAdmin= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
     await Auth.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"admin deleted successfully"})
@@ -66,7 +67,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateAdmin =async(req,res)=>{
     let {name,email,username,password,phone,confirmPassword,image}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let update= await Auth.findByIdAndUpdate({_id:id},{$set:{name,email,username,password,phone,confirmPassword,image}},{new:true})
         res.status(200).json({success:true,msg:"admin updated successfully",update})
@@ -78,9 +79,9 @@ const updateAdmin =async(req,res)=>{
 const getAllAdmin= async(req,res)=>{
     let _id= req.params._id;
     try {
-        let allAdmin= await Auth.find({name:_id})
-        if (allAdmin.length) {
-            res.status(200).json({success:true,msg:"fetched all allAdmin list successfully",allAdmin})
+        let allList= await Auth.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all allAdmin list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no allAdmin list found"})

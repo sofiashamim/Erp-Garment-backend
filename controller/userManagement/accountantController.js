@@ -54,7 +54,7 @@ let loginAccountant= async(req,res)=>{
 }
 
 let deleteAccountant= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
     await Accountant.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"Accountant deleted successfully"})
@@ -66,7 +66,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateAccountant =async(req,res)=>{
     let {name,email,username,password,phone,confirmPassword,image}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let update= await Accountant.findByIdAndUpdate({_id:id},{$set:{name,email,username,password,phone,confirmPassword,image}},{new:true})
         res.status(200).json({success:true,msg:"Accountant updated successfully",update})
@@ -78,9 +78,9 @@ const updateAccountant =async(req,res)=>{
 const getAllAccountant= async(req,res)=>{
     let _id= req.params._id;
     try {
-        let allAccountant= await Accountant.find({name:_id})
-        if (allAccountant.length) {
-            res.status(200).json({success:true,msg:"fetched all allAccountant list successfully",allAccountant})
+        let allList= await Accountant.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all allAccountant list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no allAccountant list found"})

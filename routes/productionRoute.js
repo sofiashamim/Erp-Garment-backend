@@ -6,7 +6,7 @@ router.post('/register',createProduction)
 router.post('/login',loginProduction)
 router.delete('/delete/:id',deleteProduction)
 router.put('/update/:id',updateProduction)
-router.get('/getAllAdmin',getAllProduction)
+router.get('/getAllProduction',getAllProduction)
 
 
 module.exports= router;

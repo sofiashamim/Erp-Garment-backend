@@ -6,7 +6,7 @@ router.post('/register',createCommercial)
 router.post('/login',loginCommercial)
 router.delete('/delete/:id',deleteCommercial)
 router.put('/update/:id',updateCommercial)
-router.get('/getAllAdmin',getAllCommercial)
+router.get('/getAllComm',getAllCommercial)
 
 
 module.exports= router;

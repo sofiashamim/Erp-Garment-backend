@@ -54,7 +54,7 @@ let loginMerchandiser= async(req,res)=>{
 }
 
 let deleteMerchandiser= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
     await Merchandiser.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"merchandiser deleted successfully"})
@@ -66,7 +66,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateMerchandiser =async(req,res)=>{
     let {name,email,username,password,phone,confirmPassword,image}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let update= await Merchandiser.findByIdAndUpdate({_id:id},{$set:{name,email,username,password,phone,confirmPassword,image}},{new:true})
         res.status(200).json({success:true,msg:"merchandiser updated successfully",update})
@@ -76,11 +76,11 @@ const updateMerchandiser =async(req,res)=>{
 }
 
 const getAllMerchandiser= async(req,res)=>{
-    let _id= req.params._id;
+    
     try {
-        let allMerchandiser= await Merchandiser.find({name:_id})
-        if (allMerchandiser.length) {
-            res.status(200).json({success:true,msg:"fetched all allMerchandiser list successfully",allMerchandiser})
+        let allList= await Merchandiser.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all allMerchandiser list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no allMerchandiser list found"})

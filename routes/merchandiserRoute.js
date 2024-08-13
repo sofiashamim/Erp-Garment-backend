@@ -7,7 +7,7 @@ router.post('/register',createMerchandiser)
 router.post('/login',loginMerchandiser)
 router.delete('/delete/:id',deleteMerchandiser)
 router.put('/update/:id',updateMerchandiser)
-router.get('/getAllAdmin',getAllMerchandiser)
+router.get('/getAllMerch',getAllMerchandiser)
 
 
 module.exports= router;
