@@ -54,7 +54,7 @@ let loginBuyer= async(req,res)=>{
 }
 
 let deleteBuyer= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
     await Buyer.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"buyer deleted successfully"})
@@ -66,7 +66,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateBuyer =async(req,res)=>{
     let {name,email,username,password,phone,confirmPassword,image}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let update= await Buyer.findByIdAndUpdate({_id:id},{$set:{name,email,username,password,phone,confirmPassword,image}},{new:true})
         res.status(200).json({success:true,msg:"buyer updated successfully",update})
@@ -76,11 +76,11 @@ const updateBuyer =async(req,res)=>{
 }
 
 const getAllBuyer= async(req,res)=>{
-    let _id= req.params._id;
+   
     try {
-        let allBuyer= await Buyer.find({name:_id})
-        if (allBuyer.length) {
-            res.status(200).json({success:true,msg:"fetched all allBuyer list successfully",allBuyer})
+        let allList= await Buyer.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all allBuyer list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no allBuyer list found"})

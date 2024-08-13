@@ -30,7 +30,7 @@ const createEmp= async(req,res)=>{
 }
 
 let deleteEmp= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
     await Employee.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"Employee deleted successfully"})
@@ -42,7 +42,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateEmp =async(req,res)=>{
     let {name,phone,email,address,gender,employmentType,birthDate,joiningDate,designation,salary,nidPassport,nidPassportBack}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let update= await Employee.findByIdAndUpdate({_id:id},{$set:{name,phone,email,address,gender,employmentType,birthDate,joiningDate,designation,salary,nidPassport,nidPassportBack}},{new:true})
         res.status(200).json({success:true,msg:"Employee updated successfully",update})
@@ -52,11 +52,11 @@ const updateEmp =async(req,res)=>{
 }
 
 const getAllEmp= async(req,res)=>{
-    let _id= req.params._id;
+   
     try {
-        let allEmp= await Employee.find({name:_id})
-        if (allEmp.length) {
-            res.status(200).json({success:true,msg:"fetched all allEmp list successfully",allEmp})
+        let allList= await Employee.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all allEmp list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no allEmp list found"})

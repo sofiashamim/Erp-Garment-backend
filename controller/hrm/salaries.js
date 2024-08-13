@@ -49,11 +49,11 @@ const updateSal =async(req,res)=>{
 }
 
 const getAllSal= async(req,res)=>{
-    let _id= req.params._id;
+    
     try {
-        let allSalaries= await Salary.find({name:_id})
-        if (allSalaries.length) {
-            res.status(200).json({success:true,msg:"fetched all all salaries list successfully",allSalaries})
+        let allList= await Salary.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all all salaries list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no salary list found"})

@@ -54,7 +54,7 @@ let loginCommercial= async(req,res)=>{
 }
 
 let deleteCommercial= async(req,res)=>{
-    let id=req.params._id;
+    let id=req.params.id;
  try {
     await Commercial.findByIdAndDelete(id)
     return res.status(200).json({success:true,msg:"commercial deleted successfully"})
@@ -66,7 +66,7 @@ return res.status(500).json({success:false,msg:"error in deletion",error:error.m
 
 const updateCommercial =async(req,res)=>{
     let {name,email,username,password,phone,confirmPassword,image}=req.body
-    let id= req.params._id;
+    let id= req.params.id;
     try {
         let update= await Commercial.findByIdAndUpdate({_id:id},{$set:{name,email,username,password,phone,confirmPassword,image}},{new:true})
         res.status(200).json({success:true,msg:"commercial updated successfully",update})
@@ -76,11 +76,11 @@ const updateCommercial =async(req,res)=>{
 }
 
 const getAllCommercial= async(req,res)=>{
-    let _id= req.params._id;
+   
     try {
-        let allcommercial= await Commercial.find({name:_id})
-        if (allcommercial.length) {
-            res.status(200).json({success:true,msg:"fetched all allcommercial list successfully",allcommercial})
+        let allList= await Commercial.find()
+        if (allList.length) {
+            res.status(200).json({success:true,msg:"fetched all allcommercial list successfully",allList})
             
         } else {
             return res.status(404).json({success:false,msg:"no allcommercial list found"})

@@ -6,7 +6,7 @@ router.post('/register',createBuyer)
 router.post('/login',loginBuyer)
 router.delete('/delete/:id',deleteBuyer)
 router.put('/update/:id',updateBuyer)
-router.get('/getAllAdmin',getAllBuyer)
+router.get('/getAllBuyer',getAllBuyer)
 
 
 module.exports= router;

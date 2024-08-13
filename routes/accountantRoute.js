@@ -6,7 +6,7 @@ router.post('/register',createAccountant)
 router.post('/login',loginAccountant)
 router.delete('/delete/:id',deleteAccountant)
 router.put('/update/:id',updateAccountant)
-router.get('/getAllAdmin',getAllAccountant)
+router.get('/getAllAcc',getAllAccountant)
 
 
 module.exports= router;

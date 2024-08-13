@@ -8,8 +8,8 @@ const merchandiserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
-        uniquae: true,
+        required: false,
+        unique: true,
     },
     phone: {
         type: String,
@@ -29,7 +29,7 @@ const merchandiserSchema = new Schema({
     },
     image: {
         type: String,
-        required: true,
+        required: false,
     },
     
 }, { timestamps: true });
